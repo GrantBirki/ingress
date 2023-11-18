@@ -1,6 +1,6 @@
 services:
   caddy:
-    container_name: caddy-service
+    container_name: caddy
     restart: unless-stopped
     build:
       context: ./src/caddy
