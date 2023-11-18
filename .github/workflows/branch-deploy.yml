@@ -28,7 +28,7 @@ jobs:
       - name: fetch repo name
         if: ${{ steps.branch-deploy.outputs.continue == 'true' }}
         id: repo_name
-        run: echo "::set-output name=repo_name::$(echo ${GITHUB_REPOSITORY##*/})"
+        run: echo "repo_name=$(echo ${GITHUB_REPOSITORY##*/})" >> $GITHUB_OUTPUT
 
       - name: checkout
         if: ${{ steps.branch-deploy.outputs.continue == 'true' }}
