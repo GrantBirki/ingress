@@ -1,5 +1,7 @@
 # ingress 📥
 
+[![deploy](https://github.com/GrantBirki/ingress/actions/workflows/deploy.yml/badge.svg)](https://github.com/GrantBirki/ingress/actions/workflows/deploy.yml) [![Unlock On Merge](https://github.com/GrantBirki/ingress/actions/workflows/unlock-on-merge.yml/badge.svg)](https://github.com/GrantBirki/ingress/actions/workflows/unlock-on-merge.yml)
+
 VM ingress for directing traffic to other docker compose stacks
 
 ## About ⭐
