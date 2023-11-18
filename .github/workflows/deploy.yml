@@ -1,0 +1,40 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    if: github.event_name == 'push'
+    environment: production
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: deployment check
+        uses: github/branch-deploy@v8.1.1
+        id: deployment-check
+        with:
+          merge_deploy_mode: "true"
+          environment: production
+
+      - name: fetch repo name
+        if: ${{ steps.deployment-check.outputs.continue == 'true' }}
+        id: repo_name
+        run: echo "::set-output name=repo_name::$(echo ${GITHUB_REPOSITORY##*/})"
+
+      - name: checkout
+        if: ${{ steps.deployment-check.outputs.continue == 'true' }}
+        uses: actions/checkout@v4
+
+      - name: ssh remote deploy
+        if: ${{ steps.deployment-check.outputs.continue == 'true' }}
+        uses: appleboy/ssh-action@55dabf81b49d4120609345970c91507e2d734799 # pin@v1.0.0
+        with:
+          host: ${{ vars.SSH_HOST }}
+          port: ${{ vars.SSH_PORT }}
+          username: ${{ vars.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script_stop: true
+          script: ~/${{ steps.repo_name.outputs.repo_name }}/script/deploy -r="main" -d="${{ steps.repo_name.outputs.repo_name }}"
