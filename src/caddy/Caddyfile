@@ -1,6 +1,5 @@
 ingress.birki.io {
-  respond /health {
-    body = "OK"
+  respond /health "OK" 200 {
     close
   }
 }
