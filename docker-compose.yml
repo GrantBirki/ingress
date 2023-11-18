@@ -3,7 +3,7 @@ services:
     container_name: caddy-service
     restart: unless-stopped
     build:
-      context: ./caddy
+      context: ./src/caddy
       dockerfile: ./Dockerfile
     ports:
       - 80:80

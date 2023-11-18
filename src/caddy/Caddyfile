@@ -1,0 +1,5 @@
+ingress.birki.io {
+  respond /health "OK" 200 {
+    close
+  }
+}
