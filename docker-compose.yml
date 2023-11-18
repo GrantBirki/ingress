@@ -1,0 +1,18 @@
+services:
+  caddy:
+    container_name: caddy-service
+    restart: unless-stopped
+    build:
+      context: ./caddy
+      dockerfile: ./Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./data/caddy_data:/data
+      - ./data/caddy_config:/config
+
+networks:
+  ingress:
+    name: caddyIngress
+    driver: bridge
