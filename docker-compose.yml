@@ -11,8 +11,10 @@ services:
     volumes:
       - ./data/caddy_data:/data
       - ./data/caddy_config:/config
+    networks:
+      - ingress
 
 networks:
   ingress:
-    name: caddyIngress
+    name: ingress
     driver: bridge
