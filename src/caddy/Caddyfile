@@ -3,3 +3,20 @@ ingress.birki.io {
     close
   }
 }
+
+money.birki.io {
+  handle /* {
+    reverse_proxy ghostfolio:3333  {
+      header_up Host {host}
+    }
+  }
+}
+
+### EXAMPLE ###
+# localhost {
+#   handle /* {
+#     reverse_proxy fastapi:8000  {
+#       header_up Host {host}
+#     }
+#   }
+# }
