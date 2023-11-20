@@ -4,13 +4,13 @@ ingress.birki.io {
   }
 }
 
-money.birki.io {
-  handle /* {
-    reverse_proxy ghostfolio:3333  {
-      header_up Host {host}
-    }
-  }
-}
+# money.birki.io {
+#   handle /* {
+#     reverse_proxy ghostfolio:3333  {
+#       header_up Host {host}
+#     }
+#   }
+# }
 
 ### EXAMPLE ###
 # localhost {
