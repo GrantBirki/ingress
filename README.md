@@ -31,3 +31,9 @@ This will deploy the `main` branch of ingress
 Once your project is fully setup, you will likely want to apply updates from the upstream repository of ingress. To do this, either wait for Dependabot to open a PR or open one yourself.
 
 You can comment `.deploy` on the pull request to branch-deploy and test out the update before fully "committing" to the change and merging the branch into `main`
+
+## Localhost Testing 🧪
+
+```bash
+curl -I -k https://localhost/health
+```
