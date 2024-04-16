@@ -12,6 +12,14 @@ money.birki.io {
   }
 }
 
+cache.tarkov.dev {
+  handle /* {
+    reverse_proxy cache:8080  {
+      header_up Host {host}
+    }
+  }
+}
+
 ### EXAMPLE ###
 # localhost {
 #   handle /* {
