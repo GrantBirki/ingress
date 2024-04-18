@@ -6,3 +6,4 @@ data/
 *.key
 *.secret
 .DS_Store
+creds.env
