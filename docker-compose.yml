@@ -5,6 +5,8 @@ services:
     build:
       context: ./src/caddy
       dockerfile: ./Dockerfile
+    env_file:
+      - src/caddy/creds.env
     ports:
       - 80:80
       - 443:443
