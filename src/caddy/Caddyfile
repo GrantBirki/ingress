@@ -12,11 +12,16 @@ money.birki.io {
   }
 }
 
-### EXAMPLE ###
-# localhost {
-#   handle /* {
-#     reverse_proxy fastapi:8000  {
-#       header_up Host {host}
-#     }
-#   }
-# }
+cache.tarkov.dev {
+  reverse_proxy cache:8080 {
+		header_down Strict-Transport-Security max-age=31536000;
+	}
+
+	basicauth /api/* {
+		{env.CACHE_BASIC_AUTH_USER} {env.CACHE_BASIC_AUTH_PASSWORD}
+	}
+
+	encode {
+		gzip 9
+	}
+}
