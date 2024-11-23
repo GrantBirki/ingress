@@ -16,10 +16,4 @@ cache.tarkov.dev {
 	encode {
 		gzip 9
 	}
-
-  tls {
-    issuer acme {
-      disable_tlsalpn_challenge
-    }
-  }
 }
