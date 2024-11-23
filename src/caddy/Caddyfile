@@ -16,4 +16,10 @@ cache.tarkov.dev {
 	encode {
 		gzip 9
 	}
+
+  tls {
+    issuer acme {
+      challenge_type http-01
+    }
+  }
 }
