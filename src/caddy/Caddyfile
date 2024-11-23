@@ -19,7 +19,7 @@ cache.tarkov.dev {
 
   tls {
     issuer acme {
-      challenge_type http-01
+      disable_tlsalpn_challenge
     }
   }
 }
