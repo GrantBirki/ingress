@@ -4,14 +4,6 @@ ingress.birki.io {
   }
 }
 
-money.birki.io {
-  handle /* {
-    reverse_proxy ghostfolio:3333  {
-      header_up Host {host}
-    }
-  }
-}
-
 cache.tarkov.dev {
   reverse_proxy cache:8080 {
 		header_down Strict-Transport-Security max-age=31536000;
