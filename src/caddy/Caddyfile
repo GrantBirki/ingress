@@ -2,6 +2,10 @@ ingress.birki.io {
   respond /health "OK" 200 {
     close
   }
+
+  respond /test "OK" 200 {
+	close
+  }
 }
 
 cache.tarkov.dev {
