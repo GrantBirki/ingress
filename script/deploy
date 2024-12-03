@@ -54,6 +54,12 @@ function main() {
     echo "[i] deployment requested for $ref"
     git fetch --all
     git checkout $ref
+
+    # If the ref is exactly equal to the base branch, run a git pull
+    if [[ $ref == $BASE_BRANCH ]]; then
+      echo "[i] pulling $BASE_BRANCH changes since it is the stable branch"
+      git pull origin $BASE_BRANCH
+    fi
   else
     echo "[i] deployment requested"
   fi
