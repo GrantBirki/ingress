@@ -52,16 +52,12 @@ function main() {
   elif [[ -n $ref ]]; then
     echo "[i] requested deployment to: $ref"
     git fetch --all
+    git checkout $ref
 
-    # If the ref is exactly equal to the base branch, check it out directly instead of the commit sha...
-    # ... that it represents. This is mainly for convenience when deploying the stable branch so that...
-    # ... we can run git pull when interacting with the repo on the remote server manually.
+    # If the ref is exactly equal to the base branch, run a git pull
     if [[ $ref == $BASE_BRANCH ]]; then
       echo "[i] pulling $BASE_BRANCH changes since it is the stable branch"
       git pull origin $BASE_BRANCH
-      git checkout $BASE_BRANCH
-    else
-      git checkout $ref
     fi
   else
     echo "[i] deployment requested"
