@@ -41,17 +41,16 @@ function main() {
   # debug info for deployments
   echo "[i] current working directory: $(pwd)"
   echo "[i] current commit SHA: $(git rev-parse HEAD)"
-  echo "[i] requested deployment to: $ref"
 
   # If a fork deployment is requested use the fork branch
   if [[ -n $fork ]]; then
-    echo "[i] fork deployment requested for $fork"
+    echo "[i] fork deployment requested: $fork"
     git fetch --all
     forkarray=($fork)
     git checkout -b $fork || git fetch --all && git reset --hard origin/$BASE_BRANCH && git branch -D $fork && git checkout -b $fork
     git pull "https://github.com/$fork_full_name.git" "${forkarray[1]}"
   elif [[ -n $ref ]]; then
-    echo "[i] deployment requested for $ref"
+    echo "[i] requested deployment to: $ref"
     git fetch --all
     git checkout $ref
 
@@ -65,6 +64,10 @@ function main() {
   fi
 
   echo "[i] checked out commit SHA to deploy: $(git rev-parse HEAD)"
+
+  ############################
+  # DEPLOYMENT LOGIC
+  ############################
 
   echo "[-] Killing old docker processes"
   docker compose down -t 1
