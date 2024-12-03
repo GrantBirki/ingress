@@ -4,6 +4,7 @@ ingress.birki.io {
   }
 
   respond /test "OK" 200 {
+	body "test passed"
 	close
   }
 }
