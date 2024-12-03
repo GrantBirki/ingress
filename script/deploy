@@ -13,7 +13,7 @@ function usage()
     echo -e "\t-f --fork               : the checkout command to use if a fork"
     echo -e "\t-n --fork-full-name     : the full name of the fork source in 'org/repo' format"
     echo -e "\t-d --dir                : the directory to enter for the deployment"
-    echo -e "\t-r --ref                : ref to deploy"
+    echo -e "\t-r --ref                : ref to deploy - best practice is to use the full sha"
 }
 
 while [ "$1" != "" ]; do
@@ -47,20 +47,30 @@ done
 
 # If a deployment dir is specified, enter it
 if [[ -n $dir ]]; then
-  cd ~/$dir
+  cd $dir
 fi
+
+# debug info for deployments
+echo "[i] current working directory: $(pwd)"
+echo "[i] current commit sha: $(git rev-parse HEAD)"
+echo "[i] requested deployment to: $ref"
 
 # If a fork deployment is requested use the fork branch
 if [[ -n $fork ]]; then
-  echo "fork deployment requested"
+  echo "fork deployment requested for $fork"
+  git fetch --all
   forkarray=($fork)
   git checkout -b $fork || git fetch --all && git reset --hard origin/$BASE_BRANCH && git branch -D $fork && git checkout -b $fork
   git pull "https://github.com/$fork_full_name.git" ${forkarray[1]}
-else
-  echo "branch deployment requested"
+elif [[ -n $ref ]]; then
+  echo "deployment requested for $ref"
   git fetch --all
-  git reset --hard origin/$ref
+  git checkout $ref
+else
+  echo "deployment requested"
 fi
+
+echo "[i] checked out commit sha to deploy: $(git rev-parse HEAD)"
 
 echo "[-] Killing old docker processes"
 docker compose down -t 1
