@@ -38,4 +38,4 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script_stop: true
-          script: ~/${{ steps.repo_name.outputs.repo_name }}/script/deploy -r="main" -d="${{ steps.repo_name.outputs.repo_name }}"
+          script: ~/${{ steps.repo_name.outputs.repo_name }}/script/deploy -r "main" -d "~/${{ steps.repo_name.outputs.repo_name }}"
