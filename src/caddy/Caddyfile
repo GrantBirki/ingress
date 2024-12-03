@@ -3,7 +3,7 @@ ingress.birki.io {
     close
   }
 
-  respond /test "OK" 200 {
+  respond /test 200 {
 	body "test passed"
 	close
   }
