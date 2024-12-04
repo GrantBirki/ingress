@@ -36,6 +36,7 @@ function checkout_fork() {
 
   forkarray=($fork)
   fork_branch="${forkarray[0]}"
+  fork_starting_point_branch="${forkarray[1]}"
 
   # check if the branch already exists
   if git show-ref --verify --quiet refs/heads/$fork_branch; then
@@ -43,11 +44,11 @@ function checkout_fork() {
     git checkout $fork_branch
   else
     echo "[i] creating and checking out new fork branch $fork_branch"
-    git checkout -b $fork_branch
+    git checkout -b $fork_branch $fork_starting_point_branch
   fi
 
   # pull the latest changes from the fork repository
-  git pull "https://github.com/$fork_full_name.git" $fork_branch
+  git pull "https://github.com/$fork_full_name.git" $fork_starting_point_branch
 
   # checkout the specific SHA for safety
   if [[ -n $ref ]]; then
