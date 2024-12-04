@@ -33,9 +33,30 @@ function parse_args() {
 function checkout_fork() {
   echo "[i] fork deployment requested: $fork"
   git fetch --all
+
   forkarray=($fork)
-  git checkout -b $fork || git fetch --all && git reset --hard origin/$BASE_BRANCH && git branch -D $fork && git checkout -b $fork
-  git pull "https://github.com/$fork_full_name.git" "${forkarray[1]}"
+  fork_branch="${forkarray[0]}"
+
+  # check if the branch already exists
+  if git show-ref --verify --quiet refs/heads/$fork_branch; then
+    echo "[i] fork branch $fork_branch already exists - checking it out"
+    git checkout $fork_branch
+  else
+    echo "[i] creating and checking out new fork branch $fork_branch"
+    git checkout -b $fork_branch
+  fi
+
+  # pull the latest changes from the fork repository
+  git pull "https://github.com/$fork_full_name.git" $fork_branch
+
+  # checkout the specific SHA for safety
+  if [[ -n $ref ]]; then
+    echo "[i] checking out specific fork SHA: $ref"
+    git checkout $ref
+  else
+    echo "[i] no specific SHA provided - exiting due to safety"
+    exit 1
+  fi
 }
 
 function checkout_ref() {
