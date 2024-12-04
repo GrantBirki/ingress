@@ -47,8 +47,14 @@ function checkout_fork() {
     git checkout -b $fork_branch $fork_starting_point_branch
   fi
 
-  # pull the latest changes from the fork repository
-  git pull "https://github.com/$fork_full_name.git" $fork_starting_point_branch
+  # check if the branch exists in the remote repository
+  if git ls-remote --exit-code --heads "https://github.com/$fork_full_name.git" $fork_starting_point_branch; then
+    # pull the latest changes from the fork repository
+    git pull "https://github.com/$fork_full_name.git" $fork_starting_point_branch
+  else
+    echo "[i] remote fork branch $fork_starting_point_branch does not exist - exiting"
+    exit 1
+  fi
 
   # checkout the specific SHA for safety
   if [[ -n $ref ]]; then
