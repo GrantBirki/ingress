@@ -2,6 +2,11 @@ ingress.birki.io {
   respond /health "OK" 200 {
     close
   }
+
+  respond /test 200 {
+    body "test passed 3"
+    close
+  }
 }
 
 cache.tarkov.dev {
