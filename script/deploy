@@ -35,24 +35,24 @@ function checkout_fork() {
   git fetch --all
 
   forkarray=($fork)
-  fork_branch="${forkarray[0]}"
-  fork_starting_point_branch="${forkarray[1]}"
+  fork_branch_local_name="${forkarray[0]}"
+  fork_branch_remote_name="${forkarray[1]}"
 
   # check if the branch already exists
-  if git show-ref --verify --quiet refs/heads/$fork_branch; then
-    echo "[i] fork branch $fork_branch already exists - checking it out"
-    git checkout $fork_branch
+  if git show-ref --verify --quiet refs/heads/$fork_branch_local_name; then
+    echo "[i] fork branch $fork_branch_local_name already exists - checking it out"
+    git checkout $fork_branch_local_name
   else
-    echo "[i] creating and checking out new fork branch $fork_branch"
-    git checkout -b $fork_branch $fork_starting_point_branch
+    echo "[i] creating and checking out new fork branch $fork_branch_local_name"
+    git checkout -b $fork_branch_local_name $BASE_BRANCH
   fi
 
   # check if the branch exists in the remote repository
-  if git ls-remote --exit-code --heads "https://github.com/$fork_full_name.git" $fork_starting_point_branch; then
+  if git ls-remote --exit-code --heads "https://github.com/$fork_full_name.git" $fork_branch_remote_name; then
     # pull the latest changes from the fork repository
-    git pull "https://github.com/$fork_full_name.git" $fork_starting_point_branch
+    git pull "https://github.com/$fork_full_name.git" $fork_branch_remote_name
   else
-    echo "[i] remote fork branch $fork_starting_point_branch does not exist - exiting"
+    echo "[i] remote fork branch $fork_branch_remote_name does not exist - exiting"
     exit 1
   fi
 
