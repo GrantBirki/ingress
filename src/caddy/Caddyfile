@@ -17,3 +17,13 @@ cache.tarkov.dev {
 		gzip 9
 	}
 }
+
+hooks.birki.io {
+  reverse_proxy hooks:8081 {
+		header_down Strict-Transport-Security max-age=31536000;
+	}
+
+	encode {
+		gzip 9
+	}
+}
