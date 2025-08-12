@@ -27,7 +27,7 @@ jobs:
 
       - name: checkout
         if: ${{ steps.deployment-check.outputs.continue == 'true' }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: ssh remote deploy
         if: ${{ steps.deployment-check.outputs.continue == 'true' }}
