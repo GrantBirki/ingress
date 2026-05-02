@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: deployment check
-        uses: github/branch-deploy@v10
+        uses: github/branch-deploy@c9fcc362bdcea69eecac6578dde245cd5e3a55bf # pin@v10
 
         id: deployment-check
         with:
@@ -27,7 +27,7 @@ jobs:
 
       - name: checkout
         if: ${{ steps.deployment-check.outputs.continue == 'true' }}
-        uses: actions/checkout@v5
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # pin@v5
 
       - name: ssh remote deploy
         if: ${{ steps.deployment-check.outputs.continue == 'true' }}

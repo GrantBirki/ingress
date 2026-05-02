@@ -1,12 +1,27 @@
+---
 version: 2
 updates:
-  - package-ecosystem: "docker"
-    # Look for a `Dockerfile` in the `root` directory
-    directory: "/"
-    schedule:
-      interval: "weekly"
-
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      interval: "weekly"
+- package-ecosystem: docker
+  directory: "/"
+  schedule:
+    interval: weekly
+  cooldown:
+    default-days: 45
+- package-ecosystem: github-actions
+  directory: "/"
+  schedule:
+    interval: weekly
+  cooldown:
+    default-days: 45
+- package-ecosystem: docker
+  directory: "/src/caddy"
+  schedule:
+    interval: monthly
+  cooldown:
+    default-days: 45
+- package-ecosystem: docker-compose
+  directory: "/"
+  schedule:
+    interval: monthly
+  cooldown:
+    default-days: 45
