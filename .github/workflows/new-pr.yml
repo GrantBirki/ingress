@@ -15,7 +15,7 @@ jobs:
 
     steps:
       # Comment on new PR requests with deployment instructions
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # pin@v5
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # pin@v6.0.3
       - name: comment
         uses: GrantBirki/comment@f524ee31407667c05061bad41e1758b40298bd82 # pin@v2.1.0
         continue-on-error: true
